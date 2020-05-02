@@ -14,6 +14,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
   //gameContainer.append(documentFragment)
   const boxes =  `<div class='box'></div>`.repeat(boardSize);
   gameContainer.innerHTML = boxes
-  const newGame = new game(10, 'game-container');
-  newGame.startGame()
+  let newGame = new game(10, 'game-container');
+  document.getElementById('reset').onclick = () => {
+    newGame.startGame();
+    document.getElementById('play').innerHTML= 'Pause'
+  }
+
+  document.getElementById('play').onclick = (event) => {
+    const text = event.target.innerText;
+    if(text === 'Play') {
+      event.target.innerHTML = 'Pause'
+      newGame.resumeGame();
+    } else {
+      event.target.innerHTML = 'Play'
+      newGame.pauseGame();
+    }
+  }
 });

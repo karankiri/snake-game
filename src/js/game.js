@@ -79,37 +79,18 @@ export default class game {
     if(headX === blockX && headY === blockY) {
       this.block = this.generateNextPoint();
       this.snakeSize += 1;
-      // switch (this.direction) {
-      //   case 0:
-      //     this.head[0]--;
-      //     break;
-      //   case 1:
-      //     this.head[1]++;
-      //     break;
-      //   case 2:
-      //     this.head[0]++
-      //     break;
-      //   case 3:
-      //     this.head[1]--
-      //     break;
-      // }
-      // this.renderSnake();
       this.renderBlock();
       return true
-      //this.snake = [this.head, ...this.snake]
     }
     return false
-    
   }
 
   resetGame() {
-    console.log("game -> resetGame -> Game Over",)
     clearInterval(this.interval)
     alert("Game Over")
   }
 
   changeDirection(event) {
-    console.log(event.key)
     switch (event.key) {
       case "ArrowUp":
         this.direction = 0
@@ -126,7 +107,16 @@ export default class game {
       default:
         break;
     }
-    console.log("game -> changeDirection -> this.direction", this.direction)
+  }
+
+  pauseGame() {
+    clearInterval(this.interval)
+  }
+
+  resumeGame() {
+    this.interval = setInterval(() => {
+      this.moveSnake();
+    }, 1000, this);
   }
       
 }
