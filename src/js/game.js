@@ -20,30 +20,37 @@ export default class game {
     const [x, y] = this.head;
     //console.log("game -> moveSnake -> this.head", this.head)
     console.log("game -> moveSnake -> this.direction", this.direction)
-    switch (this.direction) {
-      case 0:
-        this.head = [x-1, y]
-        break;
-      case 1:
-        this.head = [x, y+1]
-        break;
-      case 2:
-        this.head = [x+1, y]
-        break;
-      case 3:
-        this.head = [x, y-1]
-        break;
-      default:
-        console.log("game -> moveSnake -> this.head before render", this.head)
-        break;
+    for(let i=0; i < this.snake.length; i++) {
+      switch (this.direction) {
+        case 0:
+          this.head = [x-1, y]
+          this.snake[i][0]--;
+          break;
+        case 1:
+          this.head = [x, y+1]
+          this.snake[i][1]++;
+          break;
+        case 2:
+          this.head = [x+1, y]
+          this.snake[i][0]++;
+          break;
+        case 3:
+          this.head = [x, y-1]
+          this.snake[i][1]--;
+          break;
+        default:
+          console.log("game -> moveSnake -> this.head before render", this.head)
+          break;
+      }
     }
+    this.eatBlock()
     this.renderSnake()
   }
 
   startGame() {
     this.snakeSize = 1;
-    this.snake = this.generateNextPoint();
-    this.head = [...this.snake];
+    this.snake = [this.generateNextPoint()];
+    this.head = [...this.snake[0]];
     this.renderBlock();
     this.renderSnake();
     this.interval = setInterval(() => {
@@ -58,12 +65,26 @@ export default class game {
     }
     const boxes = [...document.querySelectorAll(`#${this.gameContainer} .box`)];
     boxes.map((box)=> box.classList.remove('snake'));
-    boxes[(this.head[0] * this.boxLength + this.head[1])].classList.add("snake");
+    for(let item of this.snake) {
+      boxes[(item[0] * this.boxLength + item[1])].classList.add("snake");
+    }
   }
 
   renderBlock() {
-    const boxes = document.querySelectorAll(`#${this.gameContainer} .box`);
+    const boxes = [...document.querySelectorAll(`#${this.gameContainer} .box`)];
+    boxes.map((box)=> box.classList.remove('block'));
     boxes[(this.block[0] * this.boxLength +this.block[1])].classList.add("block");
+  }
+
+  eatBlock() {
+    const [headX, headY] = this.head;
+    const [blockX, blockY] = this.block;
+    if(headX === blockX && headY === blockY) {
+      this.block = this.generateNextPoint();
+      this.renderBlock();
+      this.snakeSize += 1;
+      this.snake = [this.head, ...this.snake]
+    }
   }
 
   resetGame() {
