@@ -8,6 +8,8 @@ export default class game {
     this.block = [];
     this.interval = null;
     this.snake = new Snake(boxLength, gameContainer);
+    this.speed = 1;
+    this.score = 0;
   }
 
   generateNextPoint() {
@@ -39,7 +41,7 @@ export default class game {
         this.snake.removeTail();
       }
       this.snake.renderSnake();
-    }, 1000, this);
+    }, this.speed * 1000, this);
   }
 
   renderBlock() {
@@ -54,7 +56,12 @@ export default class game {
     if(headX === blockX && headY === blockY) {
       this.block = this.generateNextPoint();
       this.snake.snakeSize += 1;
+      if(this.snake.snakeSize % 7 == 0) {
+        this.increaseSpeed();
+      }
       this.renderBlock();
+      this.score++;
+      this.updateScore()
       return true
     }
     return false
@@ -63,10 +70,23 @@ export default class game {
   resetGame() {
     clearInterval(this.interval)
     alert("Game Over")
+    document.getElementById('play').innerText = 'Play'
   }
 
   pauseGame() {
     clearInterval(this.interval)
+  }
+
+  increaseSpeed() {
+    if(this.speed === 0.1)
+      return
+    clearInterval(this.interval)
+    this.speed -= 0.1
+    this.startGame();
+  }
+
+  updateScore() {
+    document.getElementById('score').innerHTML = this.score
   }
       
 }

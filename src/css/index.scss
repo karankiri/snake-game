@@ -24,6 +24,10 @@ h1 {
       height: 50px;
       background: gray;
       box-sizing: border-box;
+
+      &:nth-child(odd) {
+        //background: white;
+      }
   
       &.snake{
         background: greenyellow;
@@ -46,5 +50,7 @@ h1 {
       font-size: 16;
       margin: 20px;
     }
+
+    
   }
 }
