@@ -20,36 +20,33 @@ export default class game {
     const [x, y] = this.head;
     //console.log("game -> moveSnake -> this.head", this.head)
     console.log("game -> moveSnake -> this.direction", this.direction)
-    for(let i=0; i < this.snake.length; i++) {
-      switch (this.direction) {
-        case 0:
-          this.head = [x-1, y]
-          this.snake[i][0]--;
-          break;
-        case 1:
-          this.head = [x, y+1]
-          this.snake[i][1]++;
-          break;
-        case 2:
-          this.head = [x+1, y]
-          this.snake[i][0]++;
-          break;
-        case 3:
-          this.head = [x, y-1]
-          this.snake[i][1]--;
-          break;
-        default:
-          console.log("game -> moveSnake -> this.head before render", this.head)
-          break;
-      }
+    switch (this.direction) {
+      case 0:
+        this.head = [x-1, y]
+        break;
+      case 1:
+        this.head = [x, y+1]
+        break;
+      case 2:
+        this.head = [x+1, y]
+        break;
+      case 3:
+        this.head = [x, y-1]
+        break;
+      default:
+        console.log("game -> moveSnake -> this.head before render", this.head)
+        break;
     }
-    this.eatBlock()
+    this.snake = [[...this.head], ...this.snake]
+    if(!this.eatBlock()) {
+      this.snake.pop();
+    }
     this.renderSnake()
   }
 
   startGame() {
     this.snakeSize = 1;
-    this.snake = [this.generateNextPoint()];
+    this.snake = [[...this.generateNextPoint()]];
     this.head = [...this.snake[0]];
     this.renderBlock();
     this.renderSnake();
@@ -81,10 +78,28 @@ export default class game {
     const [blockX, blockY] = this.block;
     if(headX === blockX && headY === blockY) {
       this.block = this.generateNextPoint();
-      this.renderBlock();
       this.snakeSize += 1;
-      this.snake = [this.head, ...this.snake]
+      // switch (this.direction) {
+      //   case 0:
+      //     this.head[0]--;
+      //     break;
+      //   case 1:
+      //     this.head[1]++;
+      //     break;
+      //   case 2:
+      //     this.head[0]++
+      //     break;
+      //   case 3:
+      //     this.head[1]--
+      //     break;
+      // }
+      // this.renderSnake();
+      this.renderBlock();
+      return true
+      //this.snake = [this.head, ...this.snake]
     }
+    return false
+    
   }
 
   resetGame() {
