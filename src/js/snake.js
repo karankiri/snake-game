@@ -32,6 +32,17 @@ export default class Snake {
         break;
     }
     this.snake = [[...this.head], ...this.snake];
+    return !this.checkSnakeHead();
+  }
+
+  checkSnakeHead() {
+    const [x,y] = this.head;
+    if(x < 0 || y < 0 || x >= this.boxLength || y >= this.boxLength) {
+      return true
+    }
+    const arr = this.snake.filter((block)=> block[0] === x && block[1] === y)
+    return arr.length > 1
+
   }
 
   renderSnake() {
@@ -42,7 +53,12 @@ export default class Snake {
     }
   }
 
+  removeTail() {
+    this.snake.pop();
+  }
+
   changeDirection(event) {
+    const oldDirection = this.direction
     switch (event.key) {
       case "ArrowUp":
         this.direction = 0
@@ -58,6 +74,9 @@ export default class Snake {
         break;
       default:
         break;
+    }
+    if(this.snakeSize > 1 && (Math.abs(this.direction- oldDirection) == 2)) {
+      this.direction = oldDirection
     }
   }
 }

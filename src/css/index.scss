@@ -1,30 +1,50 @@
 h1 {
   color: red;
+  text-align: center;
 }
 
-#game-container {
-  width: 500px;
-  height: 500px;
-  display: flex;
-  border: 5px solid;
+.game-play-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
 
-  .box {
+  #game-container {
+    width: 500px;
+    height: 500px;
     display: flex;
-    width: 50px;
-    height: 50px;
-    background: gray;
-    box-sizing: border-box;
-
-    &.snake{
-      background: greenyellow;
-      border: 0.5px dotted green;
+    border: 5px solid;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
+    .box {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      background: gray;
+      box-sizing: border-box;
+  
+      &.snake{
+        background: greenyellow;
+      }
+  
+      &.block {
+        background: black;
+      }
     }
+  }
 
-    &.block {
-      background: black;
+  #control-zone {
+    display: flex;
+    flex-direction: column;
+    .control-button {
+      background: repeating-radial-gradient(green, transparent 100px);
+      border: none;
+      border: 2px solid green;
+      padding: 10px;
+      font-size: 16;
+      margin: 20px;
     }
   }
 }

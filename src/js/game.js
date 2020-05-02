@@ -26,16 +26,14 @@ export default class game {
   }
 
   startGame() {
-    this.interval = setInterval(() => {
-      this.snake.moveSnake();
-      const [x,y] = this.snake.head;
-      if(x < 0 || y < 0 || x >= this.boxLength || y >= this.boxLength) {
+    this.interval = setInterval(() => {  
+      if(!this.snake.moveSnake()) {
         return this.resetGame()
       }
       if(!this.eatBlock()) {
-        this.snake.snake.pop();
+        this.snake.removeTail();
       }
-      this.snake.renderSnake()
+      this.snake.renderSnake();
     }, 1000, this);
   }
 
