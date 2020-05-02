@@ -16,9 +16,11 @@ h1 {
     width: 50px;
     height: 50px;
     background: gray;
+    box-sizing: border-box;
 
     &.snake{
       background: greenyellow;
+      border: 0.5px dotted green;
     }
 
     &.block {

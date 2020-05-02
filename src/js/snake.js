@@ -9,10 +9,14 @@ export default class Snake {
     document.addEventListener('keyup', (event)=>this.changeDirection(event))
   }
 
+  initSnake([headX, headY]) {
+    this.snakeSize = 1;
+    this.snake = [[headX, headY]];
+    this.head = [...this.snake[0]];
+  }
+
   moveSnake() {
     const [x, y] = this.head;
-    //console.log("game -> moveSnake -> this.head", this.head)
-    console.log("game -> moveSnake -> this.direction", this.direction)
     switch (this.direction) {
       case 0:
         this.head = [x-1, y]
@@ -25,9 +29,6 @@ export default class Snake {
         break;
       case 3:
         this.head = [x, y-1]
-        break;
-      default:
-        console.log("game -> moveSnake -> this.head before render", this.head)
         break;
     }
     this.snake = [[...this.head], ...this.snake];
