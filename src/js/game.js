@@ -5,13 +5,17 @@ export default class game {
     this.dataPoints = [...Array(boxLength)].map(x=>Array(boxLength).fill(0));
     this.gameContainer = gameContainer;
     this.boxLength = boxLength;
-    this.block = this.generateNextPoint();
+    this.block = [];
     this.interval = null;
     this.snake = new Snake(boxLength, gameContainer);
   }
 
   generateNextPoint() {
-    return [Math.floor(Math.random() * this.boxLength),Math.floor(Math.random() * this.boxLength)] ;
+    let [x,y] = [Math.floor(Math.random() * this.boxLength),Math.floor(Math.random() * this.boxLength)];
+    while(this.snake.snake.filter((block)=> block[0] === x && block[1] === y).length > 0) {
+      [x, y] = [Math.floor(Math.random() * this.boxLength),Math.floor(Math.random() * this.boxLength)]
+    }
+    return [x, y];
   }
 
   initGame() {
@@ -21,6 +25,7 @@ export default class game {
     gameContainer.innerHTML = boxes
     const head = this.generateNextPoint();
     this.snake.initSnake([...head]);
+    this.block = this.generateNextPoint();
     this.renderBlock();
     this.snake.renderSnake();
   }

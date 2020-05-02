@@ -40,7 +40,7 @@ h1 {
     flex-direction: column;
     .control-button {
       background: repeating-radial-gradient(green, transparent 100px);
-      border: none;
+      cursor: pointer;
       border: 2px solid green;
       padding: 10px;
       font-size: 16;
