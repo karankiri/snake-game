@@ -16,15 +16,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
   gameContainer.innerHTML = boxes
   let newGame = new game(10, 'game-container');
   document.getElementById('reset').onclick = () => {
-    newGame.startGame();
-    document.getElementById('play').innerHTML= 'Pause'
+    newGame.initGame();
   }
 
   document.getElementById('play').onclick = (event) => {
     const text = event.target.innerText;
     if(text === 'Play') {
       event.target.innerHTML = 'Pause'
-      newGame.resumeGame();
+      newGame.startGame();
     } else {
       event.target.innerHTML = 'Play'
       newGame.pauseGame();
