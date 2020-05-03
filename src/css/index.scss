@@ -1,80 +1,111 @@
-h1 {
-  color: red;
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
+.container {
+  font-family: 'Quicksand', sans-serif;
 
-.game-play-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-evenly;
+  nav {
+    height: 80px;
+    background: #176AE5;
 
-  #game-container {
-    width: 500px;
-    height: 500px;
-    display: flex;
-    border: 5px solid;
+    .logo {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 50px;
+      }
+
+      span {
+        font-size: 32px;
+        font-weight: bold;
+        padding-left: 10px;
+      }
+    }
+
+
+    h1 {
+      color: red;
+      text-align: center;
+    }
+  }
+  .game-play-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
   
-    .box {
+    #game-container {
+      width: 500px;
+      height: 500px;
       display: flex;
-      width: 50px;
-      height: 50px;
-      background: #8ECC39;
-      box-sizing: border-box;
-
-      &.even {
-        background: #A7D948;
-      }
+      border: 5px solid;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    
+      .box {
+        display: flex;
+        width: 50px;
+        height: 50px;
+        background: #8ECC39;
+        box-sizing: border-box;
   
-      &.snake{
-        background: #176AE5;
-      }
-      
-      &.snake-head {
-        background-image: url('../../assets/head.svg');
-        background-size: contain;
-      }
-  
-      &.block {
-        background-image: url('../../assets/apple_types\ 1.svg');
-        background-size: 120% 120%;
-        background-position: center;
-        animation: glitter 4.5s linear 0s infinite normal;
-        // animation: blink-animation 1s steps(5, start) infinite;
-        // -webkit-animation: blink-animation 1s steps(5, start) infinite;
+        &.even {
+          background: #A7D948;
+        }
+    
+        &.snake{
+          background: #176AE5;
+        }
+        
+        &.snake-head {
+          background-image: url('../../assets/head.svg');
+          background-size: contain;
+        }
+    
+        &.block {
+          background-image: url('../../assets/apple_types\ 1.svg');
+          background-size: 120% 120%;
+          background-position: center;
+          animation: glitter 4.5s linear 0s infinite normal;
+          // animation: blink-animation 1s steps(5, start) infinite;
+          // -webkit-animation: blink-animation 1s steps(5, start) infinite;
+        }
       }
     }
-  }
-
-  #control-zone {
-    display: flex;
-    flex-direction: column;
-    .control-button {
-      background: repeating-radial-gradient(green, transparent 100px);
-      cursor: pointer;
-      border: 2px solid green;
-      padding: 10px;
-      font-size: 16;
-      margin: 20px;
+  
+    #control-zone {
+      display: flex;
+      flex-direction: column;
+      .control-button {
+        background: repeating-radial-gradient(green, transparent 100px);
+        cursor: pointer;
+        border: 2px solid green;
+        padding: 10px;
+        font-size: 16;
+        margin: 20px;
+      }
+  
+  
     }
-
-
+  }
+  
+  @keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+  
+  @keyframes glitter {
+    0%   { opacity: 1; }
+    25%  { opacity: 0.5; }
+    50%  { opacity: 1; }
+    75%  { opacity: 0.5; }
+    100% { opacity: 1; }
   }
 }
 
-@keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
-}
-
-@keyframes glitter {
-	0%   { transform: scale(1.0); opacity: 1; }
-	25%  { transform: scale(0.5); opacity: 0; }
-	50%  { transform: scale(1.0); opacity: 1; }
-	75%  { transform: scale(0.5); opacity: 0; }
-	100% { transform: scale(1.0); opacity: 1; }
-}

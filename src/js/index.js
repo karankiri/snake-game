@@ -2,6 +2,8 @@ import '../css/index.scss';
 import game from './game';
 document.addEventListener("DOMContentLoaded", function(event) {
   let newGame = new game(10, 'game-container');
+  newGame.initGame();
+  
   document.getElementById('reset').onclick = () => {
     newGame.initGame();
   }
