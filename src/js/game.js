@@ -100,6 +100,7 @@ export default class game {
 
   updateScore() {
     document.getElementById('score').innerHTML = this.score
+    document.getElementById('high-score').innerHTML = this.score
   }
       
 }
