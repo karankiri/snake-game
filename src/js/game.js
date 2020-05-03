@@ -10,6 +10,7 @@ export default class game {
     this.snake = new Snake(boxLength, gameContainer);
     this.speed = 1;
     this.score = 0;
+    this.setHighScore();
   }
 
   generateNextPoint() {
@@ -100,7 +101,16 @@ export default class game {
 
   updateScore() {
     document.getElementById('score').innerHTML = this.score
-    document.getElementById('high-score').innerHTML = this.score
+    const currentHighScore = parseInt(localStorage.getItem('high-score')) || 0;
+    if(this.score > currentHighScore) {
+      document.getElementById('high-score').innerHTML = this.score
+      localStorage.setItem('high-score',this.score)
+    }
+  }
+
+  setHighScore() {
+    const currentHighScore = parseInt(localStorage.getItem('high-score')) || 0;
+    document.getElementById('high-score').innerHTML = currentHighScore;
   }
       
 }
