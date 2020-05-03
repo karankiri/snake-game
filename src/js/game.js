@@ -23,13 +23,26 @@ export default class game {
   initGame() {
     const boardSize = this.boxLength * this.boxLength;
     const gameContainer = document.getElementById(this.gameContainer)
-    const boxes =  `<div class='box'></div>`.repeat(boardSize);
+    let boxes =  '';
+    for(let i=0; i< this.boxLength; i++) {
+      for(let j=0; j<this.boxLength; j++) {
+        if(i % 2 == 0) {
+          boxes += `<div class='box ${j %2 == 0 ? 'even': 'odd'}'></div>`
+        } else {
+          boxes += `<div class='box ${j %2 !== 0 ? 'even': 'odd'}'></div>`
+        }
+      }
+    }
     gameContainer.innerHTML = boxes
     const head = this.generateNextPoint();
     this.snake.initSnake([...head]);
     this.block = this.generateNextPoint();
     this.renderBlock();
     this.snake.renderSnake();
+    this.direction = 1;
+    this.score = 0;
+    this.speed = 1
+    this.updateScore();
   }
 
   startGame() {
@@ -56,7 +69,7 @@ export default class game {
     if(headX === blockX && headY === blockY) {
       this.block = this.generateNextPoint();
       this.snake.snakeSize += 1;
-      if(this.snake.snakeSize % 7 == 0) {
+      if(this.snake.snakeSize % 5 == 0) {
         this.increaseSpeed();
       }
       this.renderBlock();
@@ -78,7 +91,7 @@ export default class game {
   }
 
   increaseSpeed() {
-    if(this.speed === 0.1)
+    if(this.speed === 0.3)
       return
     clearInterval(this.interval)
     this.speed -= 0.1

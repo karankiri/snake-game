@@ -47,10 +47,11 @@ export default class Snake {
 
   renderSnake() {
     const boxes = [...document.querySelectorAll(`#${this.gameContainer} .box`)];
-    boxes.map((box)=> box.classList.remove('snake'));
+    boxes.map((box)=> box.classList.remove('snake', 'snake-head'));
     for(let item of this.snake) {
       boxes[(item[0] * this.boxLength + item[1])].classList.add("snake");
     }
+    boxes[(this.snake[0][0] * this.boxLength + this.snake[0][1])].classList.add("snake-head");
   }
 
   removeTail() {
