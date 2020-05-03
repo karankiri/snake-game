@@ -6,7 +6,10 @@ export default class Snake {
     this.head = []
     this.gameContainer = gameContainer;
     this.boxLength = boxLength;
-    document.addEventListener('keyup', (event)=>this.handleKeys(event))
+    document.addEventListener('keyup', (event)=>this.handleKeys(event));
+    [...document.getElementsByClassName('arrow-button')].forEach(element => {
+      element.addEventListener('click', (event)=> this.handleArrowClick(event))
+    });
   }
 
   initSnake([headX, headY]) {
@@ -87,5 +90,13 @@ export default class Snake {
       return
     }
     this.direction = direction
+  }
+
+  handleArrowClick(event) {
+    const direction = event.currentTarget.classList.contains('up') ? 0:
+                      event.currentTarget.classList.contains('right') ? 1:
+                      event.currentTarget.classList.contains('down') ? 2:
+                      3
+    this.changeDirection(direction)
   }
 }
