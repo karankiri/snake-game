@@ -6,7 +6,7 @@ export default class Snake {
     this.head = []
     this.gameContainer = gameContainer;
     this.boxLength = boxLength;
-    document.addEventListener('keyup', (event)=>this.changeDirection(event))
+    document.addEventListener('keyup', (event)=>this.handleKeys(event))
   }
 
   initSnake([headX, headY]) {
@@ -58,26 +58,34 @@ export default class Snake {
     this.snake.pop();
   }
 
-  changeDirection(event) {
-    const oldDirection = this.direction
+  handleKeys(event) {
+    let newDirection = -1
     switch (event.key) {
       case "ArrowUp":
-        this.direction = 0
+        newDirection = 0
         break;
       case "ArrowDown":
-        this.direction = 2
+        newDirection = 2
         break;
       case "ArrowLeft":
-        this.direction = 3
+        newDirection = 3
         break;
       case "ArrowRight":
-        this.direction = 1
+        newDirection = 1
         break;
       default:
         break;
     }
-    if(this.snakeSize > 1 && (Math.abs(this.direction- oldDirection) == 2)) {
-      this.direction = oldDirection
+    if(newDirection > -1) {
+      this.changeDirection(newDirection)
     }
+  }
+
+  changeDirection(direction) {
+    const oldDirection = this.direction
+    if(this.snakeSize > 1 && (Math.abs(direction- oldDirection) == 2)) {
+      return
+    }
+    this.direction = direction
   }
 }

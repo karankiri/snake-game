@@ -111,6 +111,40 @@
   
   
     }
+
+    .arrow-controller {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .arrow {
+        .arrow-button {
+          height: 50px;
+          width: 50px;
+          margin: 20px;
+          border: 2px solid;
+          cursor: pointer;
+          border-radius: 5px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+        img {
+          width: 50%;
+          height: 50%;
+        }
+        &.left {
+          transform: rotate(-90deg);
+        }
+        &.right {
+          transform: rotate(90deg);
+        }
+        &.down {
+          transform: rotate(180deg);
+        }
+      }
+    }
   }
   
   @keyframes blink-animation {
