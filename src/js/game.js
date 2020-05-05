@@ -24,13 +24,15 @@ export default class game {
   initGame() {
     const boardSize = this.boxLength * this.boxLength;
     const gameContainer = document.getElementById(this.gameContainer)
+    const gameContainerWidth = document.getElementById('game-container').clientWidth
+    const boxWidth = gameContainerWidth / this.boxLength;
     let boxes =  '';
     for(let i=0; i< this.boxLength; i++) {
       for(let j=0; j<this.boxLength; j++) {
         if(i % 2 == 0) {
-          boxes += `<div class='box ${j %2 == 0 ? 'even': 'odd'}'></div>`
+          boxes += `<div style='width:${boxWidth};height:${boxWidth}' class='box ${j %2 == 0 ? 'even': 'odd'}'></div>`
         } else {
-          boxes += `<div class='box ${j %2 !== 0 ? 'even': 'odd'}'></div>`
+          boxes += `<div style='width:${boxWidth};height:${boxWidth}' class='box ${j %2 !== 0 ? 'even': 'odd'}'></div>`
         }
       }
     }
